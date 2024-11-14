@@ -1,0 +1,19 @@
+services:
+  # デバッグようにseleniumを使う場合は以下のコメントアウトを外す
+  # selenium:
+  #   image: selenium/standalone-chrome:4.1.4-20220427
+  #   ports:
+  #     - 4444:4444
+  #     - 7900:7900
+  #   volumes:
+  #     - /dev/shm:/dev/shm
+  app:
+    build:
+      context: .
+      dockerfile: .docker/app/Dockerfile
+    volumes:
+      - .:/var/www/app
+    environment:
+      SELENIUM_URL: http://selenium:4444/wd/hub
+    tty: true
+    # stdin_open: true
